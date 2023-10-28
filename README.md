@@ -1,3 +1,3 @@
 # UACBypass
 
-UAC bypass using token manipulation
+UAC bypass by using token manipulation
