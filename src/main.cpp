@@ -1,9 +1,9 @@
 // token_manipulation.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
-#include "token_manipulation.hpp"
-#include "ntdll.hpp"
+#include "../include/stdafx.h"
+#include "../include/token_manipulation.hpp"
+#include "../include/ntdll/ntdll.hpp"
 
 int main()
 {

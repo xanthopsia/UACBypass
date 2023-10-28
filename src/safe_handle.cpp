@@ -1,5 +1,5 @@
-#include "stdafx.h"
-#include "safe_handle.hpp"
+#include "../include/stdafx.h"
+#include "../include/safe_handle.hpp"
 
 safe_handle::~safe_handle()
 {

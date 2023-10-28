@@ -1,5 +1,5 @@
-#include "stdafx.h"
-#include "ntdll.hpp"
+#include "../../include/stdafx.h"
+#include "../../include/ntdll/ntdll.hpp"
 
 fnNtOpenProcessToken ntdll::NtOpenProcessToken = nullptr;
 fnNtDuplicateToken ntdll::NtDuplicateToken = nullptr;
@@ -11,7 +11,7 @@ fnNtSetInformationThread ntdll::NtSetInformationThread = nullptr;
 
 void ntdll::initialise_functions()
 {
-	auto module_handle = GetModuleHandle(L"ntdll.dll");
+	auto module_handle = GetModuleHandle("ntdll.dll");
 	ntdll::NtOpenProcessToken = reinterpret_cast<fnNtOpenProcessToken>(GetProcAddress(module_handle, "NtOpenProcessToken"));
 	ntdll::NtDuplicateToken = reinterpret_cast<fnNtDuplicateToken>(GetProcAddress(module_handle, "NtDuplicateToken"));
 	ntdll::RtlAllocateAndInitializeSid = reinterpret_cast<fnRtlAllocateAndInitializeSid>(GetProcAddress(module_handle, "RtlAllocateAndInitializeSid"));

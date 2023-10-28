@@ -1,5 +1,5 @@
 #pragma once
-#include "stdafx.h"
+#include "../stdafx.h"
 
 #define CurrentThread ((HANDLE)(LONG_PTR)-2)
 

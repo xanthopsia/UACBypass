@@ -1,6 +1,6 @@
-#include "stdafx.h"
-#include "token_manipulation.hpp"
-#include "ntdll.hpp"
+#include "../include/stdafx.h"
+#include "../include/token_manipulation.hpp"
+#include "../include/ntdll/ntdll.hpp"
 
 bool token_manipulation::run()
 {
@@ -222,22 +222,26 @@ bool token_manipulation::revert_impersonation()
 }
 bool token_manipulation::launch_payload()
 {
-	STARTUPINFO si;
-	PROCESS_INFORMATION pi;
+	STARTUPINFOW si = { 0 };
+	PROCESS_INFORMATION pi = { 0 };
 
 	si.cb = sizeof(si);
-	GetStartupInfo(&si);
+	GetStartupInfoW(&si); // Use GetStartupInfoW for Unicode
+
 	si.dwFlags = STARTF_USESHOWWINDOW;
 	si.wShowWindow = SW_SHOW;
 
-	auto result = CreateProcessWithLogonW(TEXT("."), TEXT("."), TEXT("."),
+	auto result = CreateProcessWithLogonW(L".", L".", L".",
 		LOGON_NETCREDENTIALS_ONLY,
 		L"C:\\Windows\\System32\\cmd.exe",
 		NULL, 0, NULL, nullptr,
 		&si, &pi);
 
-	CloseHandle(pi.hProcess);
-	CloseHandle(pi.hThread);
+	if (result)
+	{
+		CloseHandle(pi.hProcess);
+		CloseHandle(pi.hThread);
+	}
 
 	return result;
 }
